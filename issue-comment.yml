@@ -1,0 +1,19 @@
+name: Issue Comment
+on:
+  issues:
+  types: [opened]
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    permissions:
+      issues:write
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: | 
+            github.rest.issues.createComment ({
+              owner: context.repo.owner,
+              repo: context.rep.repo,
+              issue number: context.issue.number,
+              body: 'Thanks for opening this issue!'
+            })
